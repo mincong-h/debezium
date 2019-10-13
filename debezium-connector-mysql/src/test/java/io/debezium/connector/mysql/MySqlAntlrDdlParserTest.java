@@ -1818,6 +1818,30 @@ public class MySqlAntlrDdlParserTest {
         assertColumn(t, "c2", "BIT", Types.BIT, 2, -1, false, false, false);
     }
 
+    @Test
+    @FixFor("DBZ-1496")
+    public void shouldParseCreateTableStatementWithLikeWhenOriginalTableExist() {
+        String ddl = "CREATE TABLE table1 (`c1` INT NOT NULL);";
+        ddl += "CREATE TABLE table2 LIKE table1;";
+        parser.parse(ddl, tables);
+
+        Table table1 = tables.forTable(new TableId(null, null, "table1"));
+        Table table2 = tables.forTable(new TableId(null, null, "table2"));
+        Column c1 = Column.editor().name("c1").type("INT").optional(false).create();
+
+        assertThat(tables.size()).isEqualTo(2);
+        assertThat(table1.columns()).containsExactly(c1);
+        assertThat(table2.columns()).containsExactly(c1);
+    }
+
+    @Test
+    @FixFor("DBZ-1496")
+    public void shouldParseCreateTableStatementWithLikeWhenOriginalTableDoesNotExist() {
+        String ddl = "CREATE TABLE table2 LIKE table1;";
+        parser.parse(ddl, tables);
+        assertThat(tables.size()).isEqualTo(0);
+    }
+
     @FixFor("DBZ-253")
     @Test
     public void shouldParseTableMaintenanceStatements() {
