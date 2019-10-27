@@ -33,6 +33,7 @@
         <!-- Checks for common coding problems -->
         <module name="EqualsHashCode" />
         <module name="IllegalInstantiation" />
+        <module name="MissingSwitchDefault" />
 
         <!-- Checks that ModeShape would really like to use but this requires cleaning up more code -->
         <!--
@@ -105,7 +106,7 @@
             <!-- Should use ModeShape-specific annotations -->
             <property name="illegalPkgs" value="net.jcip.annotations, org.apache.http.annotation"/>
         </module>
-        
+
         <!--  Avoid importing some specific classes, types, etc. -->
         <module name="io.debezium.checkstyle.IllegalImport">
             <property name="illegalClassnames" value="junit.framework.Assert" />
@@ -143,7 +144,7 @@
 
     </module>
 
-    <!--  
+    <!--
     BEGIN: ModeShape doesn't current require these, though it would be nice to do so
     -->
 
@@ -160,7 +161,7 @@
         <property name="message" value="Missing new line at the end of file" />
     </module-->
 
-    <!--  
+    <!--
     END: ModeShape doesn't current require these, though it would be nice to do so
     -->
 

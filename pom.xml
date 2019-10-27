@@ -650,7 +650,7 @@
                     <suppressionsLocation>checkstyle-suppressions.xml</suppressionsLocation>
                     <suppressionsFileExpression>checkstyle.suppressions.file</suppressionsFileExpression>
                     <consoleOutput>true</consoleOutput>
-                    <failsOnError>true</failsOnError>
+<!--                    <failsOnError>true</failsOnError>-->
                     <linkXRef>false</linkXRef>
                     <violationSeverity>error</violationSeverity>
                     <includeTestSourceDirectory>true</includeTestSourceDirectory>
